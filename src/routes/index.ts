@@ -1,4 +1,5 @@
 import {Router} from 'express'
+import { testing } from '../controllers/user';
 
 
 const router=Router();
@@ -10,13 +11,7 @@ router.get('/',(req,res)=>{
 })
 
 
-router.post('/signup', (req,res)=>{
-    console.log(req.body);
-    res.status(201).json({
-    message: 'Thing created successfully!'
-  });
-    
-})
+router.post('/signup',testing)
 
 
 export default router
