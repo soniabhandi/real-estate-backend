@@ -1,30 +1,31 @@
 import express from "express";
 import router from "./routes";
 import bodyParser from "body-parser";
-import database from "./database";
-import { addUser } from "./controllers/user";
-// const sequelize = require('./config/database');
+import { sequelize } from "./database";
 
 const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(database);
 
 app.use(router);
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+(async () => {
+  try {
+    await sequelize.authenticate();
+    console.log(
+      "Connection to the database has been established successfully."
+    );
+    // Sync the model with the database
+    await sequelize.sync({ force: true });
+    console.log("Models synced with the database.");
 
-// sequelize
-//   .sync()
-
-//   .then((result:any)=>{console.log(result);
-//     app.listen(port, () => {
-//       console.log(`Server is running at http://localhost:${port}`);
-//     });
-//   })
-//   .catch((err:any)=>{console.log(err);
-//   })
+    // Start the Express server
+    app.listen(port, () => {
+      console.log(`Server is running on http://localhost:${port}`);
+    });
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+})();
