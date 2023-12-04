@@ -13,8 +13,8 @@ export const addUser = async (req: Request, res: Response) => {
   console.log(req.body);
 
   const newUser = await User.create({
-    username: req.body.username,
-    password: req.body.password,
+    name: req.body.username,
+    phoneNo: req.body.phoneNo,
   });
 
   console.log(newUser);
