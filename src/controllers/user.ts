@@ -4,3 +4,7 @@ export const testing=(req:any,res:any)=>{
     message: 'Thing created successfully!'
   });
 }
+
+export const addUser=()=>{
+//insert user data into db
+}
