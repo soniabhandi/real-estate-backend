@@ -1,8 +1,6 @@
 // models/user.js
-import { Model, Optional } from "sequelize";
+import { Model, Optional, DataTypes } from "sequelize";
 import { sequelize } from "..";
-
-const { DataTypes } = require("sequelize");
 
 interface UserAttributes {
   id: number;
