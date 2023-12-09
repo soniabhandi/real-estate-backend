@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { testing } from "../controllers/user";
 import User from "./user";
+import Location from "./location";
 
 const router = Router();
 
@@ -9,5 +9,6 @@ router.get("/", (req, res) => {
   res.send("route created");
 });
 router.use("/user", User);
+router.use("/location", Location);
 
 export default router;

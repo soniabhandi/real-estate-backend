@@ -12,12 +12,21 @@ interface UserAttributes {
   ipAddress: string;
   deviceId: string;
   role: string;
+  otp: number;
 }
 
 interface UserCreationAttributes
   extends Optional<
     UserAttributes,
-    "id" | "email" | "location" | "city" | "ipAddress" | "deviceId" | "role"
+    | "id"
+    | "name"
+    | "email"
+    | "location"
+    | "city"
+    | "ipAddress"
+    | "deviceId"
+    | "role"
+    | "otp"
   > {}
 
 interface UserInstance
@@ -64,6 +73,10 @@ const User = sequelize.define<UserInstance>("User", {
   },
   role: {
     type: DataTypes.STRING,
+    allowNull: true,
+  },
+  otp: {
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
 });

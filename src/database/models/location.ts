@@ -1,4 +1,4 @@
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, Optional } from "sequelize";
 import { sequelize } from "..";
 
 interface LocationAttributes {
@@ -7,8 +7,11 @@ interface LocationAttributes {
   city: string;
 }
 
+interface LocationCreationAttributes
+  extends Optional<LocationAttributes, "id"> {}
+
 interface LocationInstance
-  extends Model<LocationAttributes>,
+  extends Model<LocationAttributes, LocationCreationAttributes>,
     LocationAttributes {
   createdAt?: Date;
   updatedAt?: Date;
@@ -18,7 +21,6 @@ const Location = sequelize.define<LocationInstance>("Location", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
-    allowNull: false,
     primaryKey: true,
   },
   name: {
