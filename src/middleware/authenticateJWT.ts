@@ -17,7 +17,6 @@ export const authenticateJWT = (req, res, next) => {
     //@ts-ignore
     jwt.verify(token, nconf.get("JWT_SECRET"), (err, user) => {
       if (err) return next(new InvalidJWTError());
-      if (err) return next();
       User.findByPk(user._id)
         .then((user) => {
           req.user = user;
