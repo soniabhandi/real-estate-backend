@@ -2,17 +2,18 @@
 import { Model, Optional, DataTypes } from "sequelize";
 import { sequelize } from "..";
 
-interface UserAttributes {
+export interface UserAttributes {
   id: number;
   phoneNo: string;
   name: number;
   email: string;
-  location: string;
+  location: number;
   city: string;
   ipAddress: string;
   deviceId: string;
   role: string;
   otp: number;
+  jwt: string;
 }
 
 interface UserCreationAttributes
@@ -27,9 +28,10 @@ interface UserCreationAttributes
     | "deviceId"
     | "role"
     | "otp"
+    | "jwt"
   > {}
 
-interface UserInstance
+export interface UserInstance
   extends Model<UserAttributes, UserCreationAttributes>,
     UserAttributes {
   createdAt?: Date;
@@ -56,7 +58,7 @@ const User = sequelize.define<UserInstance>("User", {
     allowNull: true,
   },
   location: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
   city: {
@@ -77,6 +79,10 @@ const User = sequelize.define<UserInstance>("User", {
   },
   otp: {
     type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+  jwt: {
+    type: DataTypes.STRING,
     allowNull: true,
   },
 });

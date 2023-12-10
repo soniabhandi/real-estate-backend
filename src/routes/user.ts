@@ -1,8 +1,14 @@
 import { Router } from "express";
-import { createUser } from "../controllers/user";
+import { userSignIn, setUserLocation } from "../controllers/user";
+
+import { authenticateJWT } from "../middleware/authenticateJWT";
+import ensureLoggedIn from "../middleware/ensureLoggedIn";
 
 const router = Router();
 
-router.post("/login", createUser);
+router.post("/signIn", userSignIn);
+router.use(authenticateJWT);
+router.use(ensureLoggedIn);
+router.post("/setLocation", setUserLocation);
 
 export default router;
